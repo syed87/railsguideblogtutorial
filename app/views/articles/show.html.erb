@@ -1,17 +1,34 @@
-<h1><%= @article.title %></h1>
+<div class="card mb-4" style="width: 100%;">
+  <% if @article.image.attached? %>
+    <%= image_tag @article.image, class: "card-img-top" %>
+  <% end %>
+  <div class="card-body">
+    <h1 class="card-title mb-4"><%= @article.title %></h1>
+    <p class="card-text"><%= simple_format(@article.body) %></p>
+  </div>
+</div>
 
-<p><%= @article.body %></p>
+<div class="mb-4">
+  <%= link_to "Edit", edit_article_path(@article), class: "btn btn-warning" %>
+  <%= link_to "Destroy", article_path(@article),
+              class: "btn btn-danger",
+              data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+              } %>
+</div>
 
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
-
-<h2>Comments</h2>
+<%
+=begin%>
+ <h2 class="mb-3">Comments</h2>
 <%= render @article.comments %>
 
-<h2>Add a comment:</h2>
+<h2 class="mb-3">Add a comment:</h2>
 <%= render "comments/form", article: @article %>
+
+<div class="mt-4">
+  <%= link_to "Back to Articles", articles_path, class: "btn btn-primary mb-3" %>
+</div> 
+<%
+=end
+%>

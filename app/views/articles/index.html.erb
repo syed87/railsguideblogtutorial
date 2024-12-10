@@ -1,15 +1,29 @@
-<h1>Articles</h1>
+<h1 class="text-center my-4">Articles</h1>
 
-Our blog has <%= Article.public_count %> articles and counting!
+<p class="text-center lead">
+  Our blog has <%= Article.public_count %> articles and counting!
+</p>
 
-<ul>
+<div class="list-group mb-4">
   <% @articles.each do |article| %>
     <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>
+      <div class="card mb-3">
+        <%= link_to article do %>
+          <% if article.image.attached? %>
+            <%= image_tag article.image, class: "card-img-top", alt: "Article image" %>
+          <% end %>
+        <% end %>
+        <div class="card-body">
+          <%= check_box_tag "article_ids[]", article.id, false, class: "form-check-input" %>
+          <%= link_to article, class: "card-title text-decoration-none text-body fw-bold" do %>
+            <%= article.title %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   <% end %>
-</ul>
+</div>
 
-<%= link_to "New Article", new_article_path %>
+<div class="text-center">
+  <%= link_to "New Article", new_article_path, class: "btn btn-primary mb-3" %>
+</div>
