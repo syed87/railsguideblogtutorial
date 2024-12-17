@@ -17,8 +17,10 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
+      flash[:success] = "Your article has been created."
       redirect_to @article
     else
+      flash.now[:success] = "Unable to create your article."
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,13 +33,16 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     if @article.update(article_params)
+      flash[:success] = "Your article has been updated."
       redirect_to @article
     else
+      flash.now[:success] = "Unable to update your article."
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    flash[:success] = "Your article has been deleted."
     @article = Article.find(params[:id])
     @article.destroy
 
