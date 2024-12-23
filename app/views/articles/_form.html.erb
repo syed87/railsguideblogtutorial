@@ -9,7 +9,7 @@
 
   <div class="mb-3">
     <%= form.label :body, class: "form-label" %>
-    <%= form.text_area :body, class: "form-control", rows: 20 %>
+    <%= form.rich_text_area :body, class: "form-control", rows: 20 %>
     <% article.errors.full_messages_for(:body).each do |message| %>
       <div class="alert alert-danger mt-2"><%= message %></div>
     <% end %>

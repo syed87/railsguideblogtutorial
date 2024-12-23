@@ -2,10 +2,10 @@ service: blog
 image: shujatkhalid/blog
 servers:
   web:
-    - 20.90.115.164
+    - 20.77.5.119
 ssh:
   user: suji
-  keys: ['~/.ssh/quickdeploy_key.pem']
+  keys: ['~/.ssh/Thursdaydeploy_key.pem']
 
 registry:
   username: shujatkhalid
